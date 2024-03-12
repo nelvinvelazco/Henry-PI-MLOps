@@ -6,6 +6,8 @@ df_games= pd.read_csv('DataSet_tranformados/games.csv',delimiter = ',',encoding 
 df_reviews= pd.read_csv('DataSet_tranformados/reviews.csv',delimiter = ',',encoding = "utf-8")
 df_items= pd.read_parquet('DataSet_tranformados/items.parquet')
 
+df_PlayTimeGenre= pd.read_csv('DataSet_tranformados/funcion1.csv')
+
 app = FastAPI()
 
 @app.get("/PlayTimeGenre/{genero}")
@@ -53,4 +55,14 @@ def UsersRecommend(año: int)-> dict:
     df_union_con_items= pd.merge(df_grupo_xgames, df_games_sin_duplicados, on='game_id', how= 'inner')
     # Se muestran los resultados de los 3 juegos mas recomendados
     result= {'Puesto {}'.format(pos +1): game for pos, game in zip(range(3),df_union_con_items['game_name'].iloc[:3])}
+    return result
+
+
+#########################################################################
+
+@app.get("/PlayTimeGenre2/{genero}")
+def PlayTimeGenre2(genero: str):
+    df_Filtro_X_genero= df_PlayTimeGenre[df_PlayTimeGenre['genres'] == genero]    
+    year_max_horas= int(df_Filtro_X_genero.iloc[0,1])
+    result= [{'Año de lanzamiento con más horas jugadas para Género {}'.format(genero): year_max_horas}]
     return result
