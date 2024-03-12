@@ -8,7 +8,7 @@ df_items= pd.read_parquet('DataSet_tranformados/items.parquet')
 
 app = FastAPI()
 
-@app.get("/PlayTimeGenre")
+@app.get("/PlayTimeGenre/{genero}")
 def PlayTimeGenre(genero: str = None)-> dict:
     df_filtro_genero= df_games[df_games['genres'] == genero]    # Se filtra el Dataset de Games con el genero del parametro
     # Se hace un Join con el df donde se cargo el filtro  y el Data set de Items
@@ -19,7 +19,7 @@ def PlayTimeGenre(genero: str = None)-> dict:
     result= {'Año de lanzamiento con más horas jugadas para Género {}'.format(genero): year_max_horas}  
     return result
 
-@app.get("/UserForGenre")
+@app.get("/UserForGenre/{genero}")
 def UserForGenre(genero: str = None)-> dict:
     # Se agrupa el dataset "df_Items" por Usuario y juegos y se sumo el tiempo de juef
     df_items_por_user = df_items.groupby(by=['user_id','game_name'], as_index=False)['playtime_forever'].sum() 
@@ -41,7 +41,7 @@ def UserForGenre(genero: str = None)-> dict:
     return result
 
 
-@app.get("/UsersRecommend")
+@app.get("/UsersRecommend/{year}")
 def UsersRecommend(año: int)-> dict:  
     # Filtra los remomendados positivos, comentarios positivos y neutrales y el año especificado en el parametro de entrada
     df_filtred_rec_sent_year= df_reviews[(df_reviews['recommend']== True) & (df_reviews['sentiment_analysis']> 0) & (df_reviews['year'] == año)]
