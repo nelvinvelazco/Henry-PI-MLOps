@@ -7,6 +7,7 @@ df_reviews= pd.read_csv('DataSet_tranformados/reviews.csv',delimiter = ',',encod
 df_items= pd.read_parquet('DataSet_tranformados/items.parquet')
 
 df_PlayTimeGenre= pd.read_csv('DataSet_tranformados/funcion1.csv')
+df_UserForGenre = pd.read_parquet('DataSet_tranformados/funcion2.parquet')
 
 app = FastAPI()
 
@@ -65,4 +66,21 @@ def PlayTimeGenre2(genero: str):
     df_Filtro_X_genero= df_PlayTimeGenre[df_PlayTimeGenre['genres'] == genero]    
     year_max_horas= int(df_Filtro_X_genero.iloc[0,1])
     result= [{'Año de lanzamiento con más horas jugadas para Género {}'.format(genero): year_max_horas}]
+    return result
+
+
+@app.get("/UserForGenre2/{genero}")
+def UserForGenre2(genero: str):
+     # Se suman las horas jugadas de todos los años por usuario
+    df_filtro_genero= df_UserForGenre[df_UserForGenre['genres'] == genero]
+    df_user_max= df_filtro_genero.groupby(by=['user_id','release_year'], as_index=False)['playtime_forever'].sum().sort_values(by='playtime_forever', ascending=False)
+    
+    user_max_horas= df_user_max.iloc[0,0]   # Se toma el user_id con mas horas jugadas 
+    df_horas_jugadas= df_user_max[df_user_max['user_id']==user_max_horas]   #se realiza un filtro por el usuario con mas horas jugadas
+    df_horas_jugadas.sort_values(by='playtime_forever', ascending=False)    #se ordena por tiempo de juego
+    
+    list_horas_xyear= [{'Año ': year, 'Horas: ': horas} for year, horas in zip(df_horas_jugadas['release_year'], df_horas_jugadas['playtime_forever'])]
+    
+    result= {'Usuario con mas horas jugadas para el Genero {}'.format(genero): user_max_horas,
+            'Horas Jugadas':list_horas_xyear}
     return result
