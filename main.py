@@ -9,6 +9,23 @@ df_reviews= pd.read_csv('DataSet_tranformados/reviews.csv',delimiter = ',',encod
 df_PlayTimeGenre= pd.read_csv('DataSet_tranformados/funcion1.csv')
 df_UserForGenre = pd.read_parquet('DataSet_tranformados/funcion2.parquet')
 
+def userRecomended_or_Not(año: int, tipo: bytes):
+    if tipo == 1:
+        # Filtra los remomendados positivos, comentarios positivos y neutrales en el año especificado en el parametro de entrada
+        df_filtred_rec_sent_year= df_reviews[(df_reviews['recommend']== True) & (df_reviews['sentiment_analysis']> 0) & (df_reviews['year'] == año)]
+    else:
+        # Filtra los No remomendados, comentarios negativosel año especificado en el parametro de entrada
+        df_filtred_rec_sent_year= df_reviews[(df_reviews['recommend']== False) & (df_reviews['sentiment_analysis']== 0) & (df_reviews['year'] == año)]    
+    # Se agrupan por id de juego y se cuentan las comentarios. Luego se ordenan de mayor a menor
+    df_grupo_xgames= df_filtred_rec_sent_year.groupby('game_id', as_index=False).size().sort_values(by='size', ascending=False)
+    # Se eliminan los duplicados de columna game_id del dataset de juegos en un df temporal
+    df_games_sin_duplicados = df_games.drop_duplicates(subset=['game_id'])  
+    # Se hace un Join con del df agrupado por id con el df de juegos temporal para tomar los nombres de los juegos
+    df_union_con_items= pd.merge(df_grupo_xgames, df_games_sin_duplicados, on='game_id', how= 'inner')
+    # Se muestran los resultados de los 3 juegos mas recomendados
+    result= {'Puesto {}'.format(pos +1): game for pos, game in zip(range(3),df_union_con_items['game_name'].iloc[:3])}
+    return result
+
 app = FastAPI()
 
 @app.get("/PlayTimeGenre/{genero}")
@@ -36,18 +53,11 @@ def UserForGenre(genero: str):
 
 @app.get("/UsersRecommend/{year}")
 def UsersRecommend(año: int):  
-    # Filtra los remomendados positivos, comentarios positivos y neutrales y el año especificado en el parametro de entrada
-    df_filtred_rec_sent_year= df_reviews[(df_reviews['recommend']== True) & (df_reviews['sentiment_analysis']> 0) & (df_reviews['year'] == año)]
-    # Se agrupan por id de juego y se cuentan las comentarios. Luego se ordenan de mayor a menor
-    df_grupo_xgames= df_filtred_rec_sent_year.groupby('game_id', as_index=False).size().sort_values(by='size', ascending=False)
-    # Se eliminan los duplicados de columna game_id del dataset de juegos en un df temporal
-    df_games_sin_duplicados = df_games.drop_duplicates(subset=['game_id'])  
-    # Se hace un Join con del df agrupado por id con el df de juegos temporal para tomar los nombres de los juegos
-    df_union_con_items= pd.merge(df_grupo_xgames, df_games_sin_duplicados, on='game_id', how= 'inner')
-    # Se muestran los resultados de los 3 juegos mas recomendados
-    result= {'Puesto {}'.format(pos +1): game for pos, game in zip(range(3),df_union_con_items['game_name'].iloc[:3])}
-    return result
+    return userRecomended_or_Not(año, 1)
 
+@app.get("/UsersNotRecommend/{year}")
+def UsersNotRecommend(año: int ):    
+    return userRecomended_or_Not(año, 2)
 
 #########################################################################
 
