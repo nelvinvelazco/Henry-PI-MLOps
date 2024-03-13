@@ -55,9 +55,20 @@ def UserForGenre(genero: str):
 def UsersRecommend(año: int):  
     return userRecomended_or_Not(año, 1)
 
+
 @app.get("/UsersNotRecommend/{year}")
 def UsersNotRecommend(año: int ):    
     return userRecomended_or_Not(año, 2)
+
+@app.get("/sentiment_analysis/{year}")
+def sentiment_analysis(año: int):
+    df_games_sin_duplicados = df_games.drop_duplicates(subset=['game_id'])
+    df_games_sin_duplicados = df_games_sin_duplicados[df_games_sin_duplicados['release_year'] == año]
+    df_union_games_rev = pd.merge(df_games_sin_duplicados, df_reviews, on='game_id', how= 'inner')
+    df_grupo_xSententiment= df_union_games_rev.groupby('sentiment_analysis', as_index=False).size().sort_values(by='sentiment_analysis', ascending=True)
+    result= {'Negative': int(df_grupo_xSententiment.iloc[0,1]), 'Neutral': int(df_grupo_xSententiment.iloc[1,1]), 'Positive': int(df_grupo_xSententiment.iloc[2,1])}
+    return result
+
 
 #########################################################################
 
