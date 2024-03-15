@@ -39,9 +39,14 @@ def PlayTimeGenre(genero: str):
 
     Returns: json
     """    
-    df_Filtro_X_genero= df_PlayTimeGenre[df_PlayTimeGenre['genres'] == genero]      # Se filtra el Dataset de Games con el genero del parametro       
-    year_max_horas= int(df_Filtro_X_genero.iloc[0,1])       #Se toma el primer año de el dataset Ordenado
-    result= [{'Año de lanzamiento con más horas jugadas para Género {}'.format(genero): year_max_horas}] 
+    df_Filtro_X_genero= df_PlayTimeGenre.copy()                 # Copia el df cargado para procesar en esta funcion    
+    df_Filtro_X_genero['genres']= df_Filtro_X_genero['genres'].str.lower()      #Convierte la columan Genero a minusculas
+    # Se filtra por el genero de parametro en minusculas
+    df_Filtro_X_genero= df_Filtro_X_genero[df_Filtro_X_genero['genres'] == genero.lower()]
+    indice_genero= df_Filtro_X_genero.index[0]                  # Se toma el indice de la primera fila del df filtrado
+    strGenero= df_PlayTimeGenre.loc[indice_genero]['genres']    # Guarda el Genero como esta en el df_game original para visualizarlo en el resultado
+    year_max_horas= int(df_Filtro_X_genero.iloc[0,1])           #Se toma el primer año de el dataset Ordenado
+    result= [{'Año de lanzamiento con más horas jugadas para Género {}'.format(strGenero): year_max_horas}] 
     return result
 
 @app.get("/UserForGenre/{genero}")
@@ -53,8 +58,12 @@ def UserForGenre(genero: str):
 
     Returns: json
     """
-    # Se filtra por el genero de entrada
-    df_filtro_genero= df_UserForGenre[df_UserForGenre['genres'] == genero]
+    df_filtro_genero= df_UserForGenre.copy()                    # Copia el df cargado para procesar en esta funcion   
+    df_filtro_genero['genres']= df_filtro_genero['genres'].str.lower()      #Convierte la columan Genero a minusculas
+    # Se filtra por el genero de entrada en minusculas
+    df_filtro_genero= df_filtro_genero[df_filtro_genero['genres'] == genero.lower()]        
+    indice_genero= df_filtro_genero.index[0]                    # Se toma el indice de la primera fila del df filtrado
+    strGenero= df_UserForGenre.loc[indice_genero]['genres']     # Guarda el Genero como esta en el df_game original para visualizarlo en el resultado
     # Se agrupa por id y año de lanzamiento y se suman las horas jugadas
     df_user_max= df_filtro_genero.groupby(by=['user_id','release_year'], as_index=False)['playtime_forever'].sum().sort_values(by='playtime_forever', ascending=False)    
     user_max_horas= df_user_max.iloc[0,0]   # Se toma el user_id con mas horas jugadas 
@@ -63,7 +72,7 @@ def UserForGenre(genero: str):
     # Se itera sobre el df donde se estan los años y hora jugadas por año y se guardan en una lista
     list_horas_xyear= [{'Año ': year, 'Horas: ': horas} for year, horas in zip(df_horas_jugadas['release_year'], df_horas_jugadas['playtime_forever'])]
     # Se guardan los resultado en la variable result y se retorna
-    result= {'Usuario con mas horas jugadas para el Genero {}'.format(genero): user_max_horas,
+    result= {'Usuario con mas horas jugadas para el Genero {}'.format(strGenero): user_max_horas,
             'Horas Jugadas':list_horas_xyear}
     return result
 
