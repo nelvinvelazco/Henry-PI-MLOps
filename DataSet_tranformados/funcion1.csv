@@ -91,8 +91,8 @@ strategy,2003,5882616
 sports,2013,5875792
 rpg,2003,5865797
 strategy,2017,5856640
-massively multiplayer,2003,5696248
 free to play,2003,5696248
+massively multiplayer,2003,5696248
 sports,2016,4668741
 sports,2015,4211575
 sports,2014,4139431
@@ -109,7 +109,6 @@ massively multiplayer,0,2916900
 action,1998,2775660
 indie,2009,2721905
 action,1999,2701097
-utilities,2014,2698036
 racing,2014,2672937
 free to play,2006,2561487
 strategy,2008,2511609
@@ -120,8 +119,6 @@ indie,2003,2127360
 massively multiplayer,2009,2022008
 sports,2010,1987139
 adventure,2008,1957496
-design &amp; illustration,2012,1930339
-web publishing,2012,1930339
 racing,2015,1883946
 racing,2008,1443411
 simulation,2007,1250856
@@ -140,25 +137,18 @@ strategy,2007,735886
 action,2002,717145
 adventure,2009,704441
 casual,1999,628383
-free to play,1999,627007
 indie,1999,627007
-utilities,2015,578342
+free to play,1999,627007
 strategy,2004,577213
 casual,2007,570262
 racing,2007,535964
-video production,2014,484402
-audio production,2014,455428
 indie,0,404365
-software training,2014,390190
-design &amp; illustration,2015,384597
 strategy,2001,372162
 racing,2012,368705
 casual,2008,350760
-web publishing,2015,348673
 indie,2005,336270
 strategy,1999,323651
 rpg,1999,317148
-utilities,2013,315536
 massively multiplayer,2005,292612
 strategy,2002,283523
 simulation,2001,273276
@@ -166,13 +156,10 @@ action,1997,269076
 strategy,2005,252355
 simulation,2002,246815
 strategy,0,241434
-animation &amp; modeling,2013,233158
 sports,2009,227107
 free to play,2008,215519
 racing,2005,214859
 adventure,2007,210866
-utilities,0,203652
-animation &amp; modeling,2015,196129
 adventure,2006,195720
 free to play,2007,192889
 rpg,2002,190425
@@ -180,24 +167,14 @@ strategy,1993,182863
 adventure,2002,179057
 simulation,0,175681
 adventure,2005,171011
-video production,2013,166555
-video production,2015,159932
 casual,2006,140195
-education,2013,139292
-web publishing,2013,139279
 strategy,1997,133571
-utilities,2016,115576
-animation &amp; modeling,2016,112358
-design &amp; illustration,2016,110256
 rpg,2006,104825
 massively multiplayer,2008,104087
-design &amp; illustration,2014,103096
 adventure,2000,102262
 massively multiplayer,2007,98114
 sports,2008,97528
 simulation,2005,94590
-web publishing,2005,93844
-design &amp; illustration,2013,91528
 racing,2017,90589
 simulation,2004,89604
 indie,2001,88452
@@ -216,14 +193,10 @@ casual,2000,50259
 action,1996,49565
 adventure,2001,46631
 action,1994,40358
-animation &amp; modeling,2014,40063
 casual,2005,39585
-photo editing,2016,38264
 indie,2002,37884
-software training,2015,36482
-education,2015,36061
-sports,1995,31004
 racing,1995,31004
+sports,1995,31004
 adventure,1988,29963
 adventure,1998,25892
 strategy,1998,25148
@@ -233,8 +206,6 @@ adventure,1997,19992
 indie,1998,19957
 rpg,2004,19593
 action,1988,16001
-software training,2013,15597
-audio production,2013,15584
 racing,1998,15130
 early access,2012,14901
 adventure,1994,14817
@@ -249,28 +220,15 @@ indie,2004,12382
 action,1993,12160
 casual,1998,12004
 simulation,1998,11074
-audio production,2007,11058
-utilities,2007,11058
-design &amp; illustration,2007,11058
-video production,2007,11058
-web publishing,2007,11058
-photo editing,2007,11058
 casual,1993,10627
 casual,1994,10572
-utilities,2012,10338
-utilities,2017,9403
-software training,2017,9382
-web publishing,2017,9382
-education,2017,9382
 racing,1997,9319
 strategy,1996,8467
 early access,0,8363
 rpg,1996,7075
-animation &amp; modeling,2012,6544
 simulation,2003,6419
 early access,2018,6127
 adventure,2004,6100
-photo editing,2014,5760
 adventure,1989,5691
 simulation,1994,5487
 strategy,2000,5442
@@ -278,39 +236,30 @@ strategy,1995,5391
 indie,2000,5304
 rpg,1986,5100
 casual,1986,5100
-indie,1986,5100
-simulation,1986,5100
 adventure,1986,5100
+simulation,1986,5100
+indie,1986,5100
 simulation,1989,5084
-audio production,2015,5060
 free to play,2001,4965
 adventure,1992,4327
-video production,2012,4010
 rpg,2018,3822
 adventure,1995,3538
 racing,2004,3477
-adventure,1983,3473
 casual,1983,3473
 action,1983,3473
+adventure,1983,3473
 adventure,1999,3189
 casual,1995,3168
 indie,1995,3168
 racing,2000,3015
-photo editing,2012,2678
 casual,2003,2536
 action,1991,2502
 indie,2018,2326
-video production,2016,2264
 casual,2001,2255
 action,2018,2224
 simulation,2018,2203
 rpg,1992,2164
 casual,1997,2126
-software training,2008,2058
-utilities,2008,2058
-animation &amp; modeling,2008,2058
-design &amp; illustration,2008,2058
-education,2008,2058
 adventure,1991,1951
 simulation,1990,1926
 action,1992,1925
@@ -322,35 +271,23 @@ racing,1996,1202
 sports,0,1195
 adventure,1990,1189
 simulation,1995,980
-education,2016,616
 action,1989,607
 indie,1996,570
-photo editing,2015,568
-software training,2016,481
-audio production,2016,459
 action,1984,384
-adventure,1984,384
 casual,1984,384
+adventure,1984,384
 racing,2003,374
 racing,1994,289
 strategy,1991,209
-utilities,2006,173
-video production,2006,173
-photo editing,2006,173
 simulation,1991,144
 strategy,1994,140
-web publishing,2016,136
 free to play,1996,127
 action,1990,69
 simulation,1993,65
 strategy,1990,60
 racing,1999,32
-education,2014,25
-design &amp; illustration,2017,21
 adventure,2018,21
 rpg,1991,20
 simulation,1992,11
-education,2010,9
 simulation,1988,1
 simulation,1987,0
-software training,2010,0
