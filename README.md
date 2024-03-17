@@ -3,8 +3,8 @@
 # **PROYECTO INDIVIDUAL - Machine Learning Operations (MLOps)**
 
  ##  ```Tabla de Contenido```
-1. [Informacion General](#Informacion-General)
-2. [Tecnologías](#tecnologias)
+1. [Información General](#Informacion-General)
+2. [Tecnologías Utilizadas](#tecnologias-Utilizadas)
 3. [ETL](#etl)
 4. [API](#api)
 5. [EDA](#eda)
@@ -22,7 +22,7 @@
 
 ### En esta fase se extrajeron los datos desde archivos comprimidos y en formato json, luego se hicieron transformaciones eliminando valores nulos y columnas innecesarias, se imputaron valores faltantes o nulos, se cambiaron tipos de datos. Por ultimo, todos los dataframe tranformados cargados en archivos .csv y .parquet para reducir espacio de almacenamiento. 
 
-### El codigo realizado se puede visualizar en el archivo [ELT.ipynb](ELT.ipynb)
+### El codigo realizado se puede visualizar en el archivo [ETL.ipynb](ELT.ipynb)
 
 ## ```API```
 
