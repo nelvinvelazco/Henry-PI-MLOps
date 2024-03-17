@@ -1,18 +1,27 @@
 from fastapi import FastAPI
 import pandas as pd
+import numpy as np
 
-# Se cargan los dataset transformados
+# Se carga el dataset de games
 df_games= pd.read_csv('DataSet_tranformados/games.csv',delimiter = ',',encoding = "utf-8")
+# Se carga el dataset de reviews
 df_reviews= pd.read_csv('DataSet_tranformados/reviews.csv',delimiter = ',',encoding = "utf-8")
 
 # Se carga el dataFrame para la funcion PlayTimeGenre()
 df_PlayTimeGenre= pd.read_csv('DataSet_tranformados/funcion1.csv')
 # Se carga el dataFrame para la funcion UserForGenre
 df_UserForGenre = pd.read_parquet('DataSet_tranformados/funcion2.parquet')
+# Carga los juegos utilizados en el modelo de reocmendacion
+df_games_modelML = pd.read_csv('DataSet_tranformados/games_modelo_ML.csv')
 
+# Se carga la matriz para el modelo de recomendaciones 
+similitudes = np.load('DataSet_tranformados/modelo.npy')
+
+
+# Funcion para los buscar los generos
 def buscar_genero(genero: str):
     generos = df_games['genres'].unique()
-    for i, valor in enumerate(generos):
+    for valor in generos:
         if genero.lower() == str(valor).lower():
             result= valor
             break
@@ -119,6 +128,20 @@ def sentiment_analysis(año: int):
     result= {'Negative': int(df_grupo_xSententiment.iloc[0,1]), 'Neutral': int(df_grupo_xSententiment.iloc[1,1]), 'Positive': int(df_grupo_xSententiment.iloc[2,1])}
     return result
 
+@app.get("/recomendacion_juego/{id_game}")
+def recomendacion_juego(id_game: int):
+    result= {}
+    lista_juegos= []    
+    indice = df_games_modelML.loc[df_games_modelML['game_id'] == id_game].index
+    if indice.empty:
+        result= {"Error": 'JUEGO NO ENCONTRADO'}
+    else:
+        indice= indice[0]
+        distancias= sorted(list(enumerate(similitudes[indice])), reverse= True, key=lambda x:x[1])
+        for item in distancias[1:6]:
+            lista_juegos.append(df_games_modelML.iloc[item[0]]['game_name'])
+        result = {'JUEGOS RECOMENTADOS': lista_juegos}
+    return result
 
 #########################################################################
 
