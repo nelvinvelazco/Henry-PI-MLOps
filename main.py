@@ -1,3 +1,4 @@
+# se cargan las librerias necesarias
 from fastapi import FastAPI
 import pandas as pd
 import numpy as np
@@ -51,7 +52,8 @@ app = FastAPI()
 
 @app.get("/PlayTimeGenre/{genero}")
 def PlayTimeGenre(genero: str):
-    """Retorna el año del genero de juego con mas horas jugadas
+    """
+    Retorna el año del genero de juego con mas horas jugadas
 
     Args: genero (str): Genero de Juego
 
@@ -65,7 +67,8 @@ def PlayTimeGenre(genero: str):
 
 @app.get("/UserForGenre/{genero}")
 def UserForGenre(genero: str):  
-    """Retorna el usuario con mas horas jugara para el genero  ingresado y 
+    """
+    Retorna el usuario con mas horas jugara para el genero  ingresado y 
         una lista con las horas jugadas de ese usuario por año
 
     Args: genero (str): Genero de Juego
@@ -89,7 +92,8 @@ def UserForGenre(genero: str):
 
 @app.get("/UsersRecommend/{year}")
 def UsersRecommend(año: int):
-    """Retorna los 3 juegos mas recomedados por los usuarios para el año ingresado
+    """
+    Retorna los 3 juegos mas recomedados por los usuarios para el año ingresado
 
     Args: año (int): Año
 
@@ -100,7 +104,8 @@ def UsersRecommend(año: int):
 
 @app.get("/UsersNotRecommend/{year}")
 def UsersNotRecommend(año: int): 
-    """Retorna los 3 juegos menos recomedados por los usuarios para el año ingresado
+    """
+    Retorna los 3 juegos menos recomedados por los usuarios para el año ingresado
 
     Args: año (int): Año
 
@@ -110,7 +115,8 @@ def UsersNotRecommend(año: int):
 
 @app.get("/sentiment_analysis/{year}")
 def sentiment_analysis(año: int):
-    """Retorna la cantidad de reseñas (negrativas, neutrales y positivas) de la categoria de analisis de sentimiento
+    """
+    Retorna la cantidad de reseñas (negativas, neutrales y positivas) de la categoria de analisis de sentimiento
 
     Args: año (int): Año
 
@@ -130,17 +136,26 @@ def sentiment_analysis(año: int):
 
 @app.get("/recomendacion_juego/{id_game}")
 def recomendacion_juego(id_game: int):
-    result= {}
-    lista_juegos= []    
-    indice = df_games_modelML.loc[df_games_modelML['game_id'] == id_game].index
-    if indice.empty:
+    """
+    Retorna los 5 juegos mas recomendados en base a un id de juego dado
+    
+    Args: id_game (int): Id del Juego
+
+    Returns: json
+    """
+    result= {}          # se inicializa una variable tipo diccionario
+    lista_juegos= []    # se inicializa una variable tipo lista 
+    indice = df_games_modelML.loc[df_games_modelML['game_id'] == id_game].index     # se busca si existe el id del juego y se guarda el indice
+    if indice.empty:    # si el indice esta vacio duevuelve un mensaje de error
         result= {"Error": 'JUEGO NO ENCONTRADO'}
     else:
-        indice= indice[0]
+        indice= indice[0]       # se tranforma el indice a numerico
+        # se ordenan las distancias de coseno en la posicion del indice del juego en la matriz de similitudes
         distancias= sorted(list(enumerate(similitudes[indice])), reverse= True, key=lambda x:x[1])
-        for item in distancias[1:6]:
-            lista_juegos.append(df_games_modelML.iloc[item[0]]['game_name'])
-        result = {'JUEGOS RECOMENTADOS': lista_juegos}
+        nombre_juego= df_games_modelML.iloc[indice]['game_name']       # Toma el nombre del juego ingresado
+        for i, item in enumerate(distancias[1:6]):        # se itera sobre los primeros 5  items de la lista omitiendo el 1ro
+            lista_juegos.append({str(i+1)+'.':df_games_modelML.iloc[item[0]]['game_name']})       # se guarda en una lista los primeros 5 juegos
+        result = {'Juegos remomendados para':nombre_juego, 'Lista de similares:':lista_juegos }     # se muestra el resultado con la lista en formato json        
     return result
 
 #########################################################################
