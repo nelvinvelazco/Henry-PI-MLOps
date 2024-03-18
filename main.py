@@ -68,7 +68,7 @@ def PlayTimeGenre(genero: str):
 @app.get("/UserForGenre/{genero}")
 def UserForGenre(genero: str):  
     """
-    Retorna el usuario con mas horas jugara para el genero  ingresado y 
+    Retorna el usuario con mas horas jugadas para el genero ingresado y 
         una lista con las horas jugadas de ese usuario por año
 
     Args: genero (str): Genero de Juego
@@ -93,7 +93,7 @@ def UserForGenre(genero: str):
 @app.get("/UsersRecommend/{year}")
 def UsersRecommend(año: int):
     """
-    Retorna los 3 juegos mas recomedados por los usuarios para el año ingresado
+    Retorna los 3 juegos mas recomendados por los usuarios para el año ingresado
 
     Args: año (int): Año
 
