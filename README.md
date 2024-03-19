@@ -1,6 +1,6 @@
-![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
+![Logo](_src/assets/logo_steam.jpg)
 
-# **PROYECTO INDIVIDUAL - Machine Learning Operations (MLOps)**
+ # <center>**PROYECTO INDIVIDUAL - Machine Learning Operations (MLOps)**
 
  ##  `Tabla de Contenido`
 1. [Información General](#Información-General)
@@ -47,3 +47,5 @@
 ## `Modelo de Machine Learning`
 
 ### El modelo de remomendacion elegido fue item-item. Para este se utilizó la "Similitud del Coseno" para encontrar los juegos mas similares al ingresado como parametro.
+
+### Se puede ver la en este link: [https://henry-pi-mlops-nelvin.onrender.com/docs](https://henry-pi-mlops-nelvin.onrender.com/docs)
