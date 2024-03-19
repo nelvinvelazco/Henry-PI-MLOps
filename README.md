@@ -1,6 +1,6 @@
 ![Logo](_src/assets/logo_steam.jpg)
 
- # <center>**PROYECTO INDIVIDUAL - Machine Learning Operations (MLOps)**
+ # **PROYECTO INDIVIDUAL - Machine Learning Operations (MLOps)**
 
  ##  `Tabla de Contenido`
 1. [Información General](#Información-General)
@@ -9,6 +9,7 @@
 4. [EDA](#eda)
 5. [API](#api)
 6. [Modelo de Machine Learning](#modelo-ml)
+7. [Visualización](#visualización)
 
 ## `Informacion General`
 
@@ -46,6 +47,11 @@
 
 ## `Modelo de Machine Learning`
 
-### El modelo de remomendacion elegido fue item-item. Para este se utilizó la "Similitud del Coseno" para encontrar los juegos mas similares al ingresado como parametro.
+### El modelo de recomendacion elegido fue item-item. Para este se utilizó la "Similitud del Coseno" para encontrar los juegos mas similares al ingresado como parametro.
 
-### Se puede ver la en este link: [https://henry-pi-mlops-nelvin.onrender.com/docs](https://henry-pi-mlops-nelvin.onrender.com/docs)
+
+## `Visualización`
+
+### - Se puede ver la API deployada en Render en este link: [https://henry-pi-mlops-nelvin.onrender.com/docs](https://henry-pi-mlops-nelvin.onrender.com/docs)
+
+### - Tambien se grabó un video corto explicando un poco el proyecto y haciendo una demostracion: [video](https://drive.google.com/file/d/1vaLuodePxqWefO9zbajXydNxqyfQb12E/view)
