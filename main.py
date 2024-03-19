@@ -155,7 +155,7 @@ def recomendacion_juego(id_game: int):
         nombre_juego= df_games_modelML.iloc[indice]['game_name']       # Toma el nombre del juego ingresado
         for i, item in enumerate(distancias[1:6]):        # se itera sobre los primeros 5  items de la lista omitiendo el 1ro
             lista_juegos.append({str(i+1)+'.':df_games_modelML.iloc[item[0]]['game_name']})       # se guarda en una lista los primeros 5 juegos
-        result = {'Juegos remomendados para':nombre_juego, 'Lista de similares:':lista_juegos }     # se muestra el resultado con la lista en formato json        
+        result = {'Juegos recomendados para':nombre_juego, 'Lista de similares:':lista_juegos }     # se muestra el resultado con la lista en formato json        
     return result
 
 #########################################################################
