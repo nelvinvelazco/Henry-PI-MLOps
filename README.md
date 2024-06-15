@@ -43,11 +43,11 @@
 - #### *`sentiment_analysis(año)`*: Retorna la cantidad de reseñas (negativas, neutrales y positivas) de la categoria de analisis de sentimiento
 - #### *`recomendacion_juego(id_game)`*: Retorna los 5 juegos mas recomendados en base a un id de juego ingresado
 
-### Se puede ver el codigo en el archivo [main.py](main.py)
+#### Se puede ver el codigo en el archivo [main.py](main.py)
 
 ## `Modelo de Machine Learning`
 
-### El modelo de recomendacion elegido fue item-item. Para este se utilizó la "Similitud del Coseno" para encontrar los juegos mas similares al ingresado como parametro.
+#### El modelo de recomendacion elegido fue item-item. Para este se utilizó la "Similitud del Coseno" para encontrar los juegos mas similares al ingresado como parametro.
 
 
 ## `Visualización`
